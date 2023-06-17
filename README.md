@@ -79,7 +79,7 @@ Example commands:
 
 ```sh
   cd my-folder
-  git clone git@github.comuno36/Book-store.git
+  git clone git@github.comuno36/BookStore.git
 ```
 
 ### Install
