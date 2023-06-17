@@ -1,4 +1,222 @@
+@import url(https://allfont.net/allfont.css?fonts=roboto-slab-light);
+
+/* header css */
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: #f5f6fa;
+}
+
 h1 {
-  color: brown;
-  background-color: yellow;
+  font-size: 1.875rem;
+  color: #0290ff;
+  font-family: 'Montserrat-Bold', Arial, Helvetica, sans-serif;
+}
+
+.App {
+  border: 1px solid #e8e8e8;
+  margin: 0 5rem;
+  border-radius: 4px;
+  margin-top: 3.25rem;
+  padding-bottom: 1.813rem;
+  background-color: #fafafa;
+}
+
+header {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 0 6.25rem;
+  border-bottom: 1px solid #e8e8e8;
+  background-color: #fff;
+  margin-bottom: 1.813rem;
+  border-radius: 4px;
+}
+
+header nav a {
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: 'Montserrat-Regular', Arial, Helvetica, sans-serif;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+}
+
+.user {
+  position: absolute;
+  margin-left: 75%;
+  font-size: 2rem;
+  color: #0290ff;
+}
+
+.link-item1 {
+  color: #121212;
+}
+
+.link-item2 {
+  color: #bbb;
+}
+
+a:hover {
+  color: red;
+}
+
+header nav a.active {
+  background-color: #0290ff;
+}
+
+header nav a.active:hover {
+  background-color: #858694;
+  color: #ffff;
+}
+
+/* book css */
+
+.book-div {
+  margin: 1.813rem 6.25rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 1rem 1.688rem;
+}
+
+hr {
+  margin: 1.813rem 6.25rem;
+  border: 1px solid #e8e8e8;
+}
+
+.main-book {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1.5fr;
+}
+
+.book-category {
+  font-family: 'Montserrat-bold', Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: normal;
+  color: #888;
+  font-weight: bold;
+  margin-bottom: -15px;
+}
+
+.current {
+  margin-top: 40px;
+  font-family: 'Courier New', Arial, Helvetica, sans-serif;
+  font-size: 0.975rem;
+  letter-spacing: normal;
+  color: #888;
+  margin-bottom: -10px;
+}
+
+.chapter {
+  font-family: 'Courier New', Arial, Helvetica, sans-serif;
+  font-size: 0.975rem;
+  letter-spacing: normal;
+  color: #121212;
+  font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+.update-btn {
+  background-color: #0290ff;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.book-title {
+  margin-bottom: -9px;
+  font-family: 'Courier New', Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -0.1rem;
+}
+
+button {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button,
+.book-author {
+  color: #0290ff;
+  border: none;
+  background-color: #fff;
+  padding: 0;
+  font-family: 'Courier New', Arial, Helvetica, sans-serif;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  list-style-type: none;
+  margin-left: -40px;
+}
+
+.percentage {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  border-top-color: #0290ff;
+  border-bottom-color: #0290ff;
+  border-right-color: #0290ff;
+  border-left-color: #f5f6fa;
+  transform: rotate(45deg);
+}
+
+.book-percentage {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.complete {
+  margin-top: -45px;
+  font-family: 'courier New', Arial, Helvetica, sans-serif;
+  color: #0290ff;
+}
+
+/* form css */
+
+.form-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 6fr 2fr 1fr;
+  gap: 40px;
+}
+
+.form-btn,
+#category,
+input[type=text] {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+}
+
+.form-btn {
+  color: #fff;
+  background-color: #0290ff;
+}
+
+.add-book-div {
+  padding: 0.1rem 6.25rem;
+}
+
+.add-book {
+  font-family: 'Montserrat-Bold', Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: -0.18rem;
+  color: #888;
 }
