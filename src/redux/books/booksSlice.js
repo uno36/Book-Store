@@ -9,12 +9,11 @@ const bookSlice = createSlice({
   initialState,
   reducers: {
     addBook: (state, action) => {
-      const { title, author, category } = action.payload;
+      const { title, author } = action.payload;
       const newBook = {
         id: state.books.length + 1,
         title,
         author,
-        category,
       };
       state.books.push(newBook);
     },
@@ -22,8 +21,11 @@ const bookSlice = createSlice({
       const bookId = action.payload;
       state.books = state.books.filter((book) => book.id !== bookId);
     },
+    checkStatus: (state) => {
+      state.status = 'Under construction';
+    },
   },
 });
 
-export const { addBook, removeBook } = bookSlice.actions;
+export const { addBook, removeBook, checkStatus } = bookSlice.actions;
 export default bookSlice.reducer;
