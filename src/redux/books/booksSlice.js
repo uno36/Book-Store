@@ -21,11 +21,8 @@ const bookSlice = createSlice({
       const bookId = action.payload;
       state.books = state.books.filter((book) => book.id !== bookId);
     },
-    checkStatus: (state) => {
-      state.status = 'Under construction';
-    },
   },
 });
 
-export const { addBook, removeBook, checkStatus } = bookSlice.actions;
+export const { addBook, removeBook } = bookSlice.actions;
 export default bookSlice.reducer;
