@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import bookList from './BookList';
 
 const BookForm = ({ addBook }) => {
   const titleRef = useRef();
@@ -11,14 +10,14 @@ const BookForm = ({ addBook }) => {
     const title = titleRef.current.value;
     const category = categoryRef.current.value;
 
-    const foundBook = bookList.find(
-      (book) => book.title.toLowerCase() === title.toLowerCase()
-      && book.category.toLowerCase() === category.toLowerCase(),
-    );
-    const author = foundBook ? foundBook.author : 'Unknown';
-
     if (title && category) {
-      addBook({ title, author, category });
+      const newBook = {
+        id: Date.now(), // Generate a unique ID for the new book
+        title,
+        category,
+      };
+
+      addBook(newBook);
     }
 
     titleRef.current.value = '';
