@@ -1,27 +1,31 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const BookForm = ({ addBook }) => {
-  const titleRef = useRef();
-  const categoryRef = useRef();
+const BookForm = ({ addBook, removeBookHandler }) => {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState('');
 
   const submitBookHandler = (e) => {
     e.preventDefault();
-    const title = titleRef.current.value;
-    const category = categoryRef.current.value;
 
-    if (title && category) {
+    const newTitle = e.target.title.value;
+    const newCategory = e.target.category.value;
+
+    if (newTitle && author && newCategory) {
       const newBook = {
-        id: Date.now(), // Generate a unique ID for the new book
-        title,
-        category,
+        id: Date.now(),
+        title: newTitle,
+        author,
+        category: newCategory,
       };
 
       addBook(newBook);
     }
 
-    titleRef.current.value = '';
-    categoryRef.current.value = '';
+    setTitle('');
+    setAuthor('');
+    setCategory('');
   };
 
   return (
@@ -31,13 +35,35 @@ const BookForm = ({ addBook }) => {
         <div className="form-container">
           <div>
             <label htmlFor="title">
-              <input type="text" id="title" placeholder="Book title" ref={titleRef} />
+              <input
+                type="text"
+                id="title"
+                placeholder="Book title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="author">
+              <input
+                type="text"
+                id="author"
+                placeholder="Book author"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+              />
             </label>
           </div>
           <div>
             <label htmlFor="category">
-              <select id="category" ref={categoryRef} required>
-                <option disabled selected value>Category</option>
+              <select
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="Category"> Category</option>
                 <option value="Action">Action</option>
                 <option value="Science Fiction">Science Fiction</option>
                 <option value="Economy">Economy</option>
@@ -57,6 +83,7 @@ const BookForm = ({ addBook }) => {
 
 BookForm.propTypes = {
   addBook: PropTypes.func.isRequired,
+  removeBookHandler: PropTypes.func.isRequired,
 };
 
 export default BookForm;

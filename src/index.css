@@ -192,7 +192,7 @@ button,
 .form-container {
   width: 100%;
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr;
+  grid-template-columns: 6fr 2fr 1.5fr 1fr;
   gap: 40px;
 }
 
@@ -217,6 +217,5 @@ input[type=text] {
 .add-book {
   font-family: 'Montserrat-Bold', Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
-  letter-spacing: -0.18rem;
   color: #888;
 }
