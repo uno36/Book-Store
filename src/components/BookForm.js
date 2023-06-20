@@ -41,6 +41,8 @@ const BookForm = ({ addBook }) => {
                 <option value="Action">Action</option>
                 <option value="Science Fiction">Science Fiction</option>
                 <option value="Economy">Economy</option>
+                <option value="Fiction">Fiction</option>
+                <option value="NonFiction">Nonfiction</option>
               </select>
             </label>
           </div>
