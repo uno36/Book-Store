@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const BookForm = ({ addBook, removeBookHandler }) => {
+const BookForm = ({ addBook }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('');
@@ -83,7 +83,6 @@ const BookForm = ({ addBook, removeBookHandler }) => {
 
 BookForm.propTypes = {
   addBook: PropTypes.func.isRequired,
-  removeBookHandler: PropTypes.func.isRequired,
 };
 
 export default BookForm;
