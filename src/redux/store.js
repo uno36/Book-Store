@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import booksReducer from './books/booksSlice';
-import categoriesReducer from './categories/categoriesSlice';
+import apiMiddleware from './cutomMiddleware';
 
 const store = configureStore({
-  reducer: { books: booksReducer, categories: categoriesReducer },
+  reducer: {
+    books: booksReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware),
 });
 
 export default store;

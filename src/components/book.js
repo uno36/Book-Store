@@ -1,9 +1,7 @@
-// Book Component File
-
+/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import { addBook, deleteBook, getBooks } from '../redux/books/booksSlice';
 import BookForm from './BookForm';
 
@@ -27,9 +25,9 @@ const Book = ({ onDelete }) => {
   };
 
   const renderBooks = () => books.map(({
-    items, category, title, author, percentage, chapter,
+    item_id, category, title, author, percentage, chapter,
   }) => (
-    <div className="book-div" key={uuidv4}>
+    <div className="book-div" key={item_id}>
       <div className="main-book">
         <div>
           <p className="book-category">{category}</p>
@@ -40,7 +38,7 @@ const Book = ({ onDelete }) => {
               <button type="button">Comments</button>
             </li>
             <li className="btn-items">
-              <button type="button" onClick={() => handleDelete(uuidv4)}>
+              <button type="button" onClick={() => handleDelete(item_id)}>
                 Remove
               </button>
             </li>
