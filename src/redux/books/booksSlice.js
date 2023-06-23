@@ -1,65 +1,45 @@
+// Redux Slice File
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/cA7Cf2g9Qk0jCIg46zd1/books/';
+const API = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/uJMha7Lpi2uDoTqENtNp';
 
-export const fetchBooks = createAsyncThunk(
-  'books/fetchBooks',
-  async (_, thunkCB) => {
-    try {
-      const response = await axios(url);
-      return response.data;
-    } catch (err) {
-      return thunkCB.rejectWithValue(
-        'An error occurred while fetching the data',
-      );
-    }
-  },
-);
+export const addBook = createAsyncThunk('books/ADD_BOOK', async (book) => {
+  try {
+    await axios.post(`${API}/books`, book);
+    return book;
+  } catch (error) {
+    throw new Error(error);
+  }
+});
 
-export const addBook = createAsyncThunk(
-  'books/addBook',
-  async (book, thunkCB) => {
-    try {
-      const response = await axios.post(url, book, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.status === 201) {
-        thunkCB.dispatch(fetchBooks());
-        return null;
-      }
-      return null;
-    } catch (err) {
-      return thunkCB.rejectWithValue('Failed to add book');
-    }
-  },
-);
+export const getBooks = createAsyncThunk('books/GET_BOOKS', async () => {
+  try {
+    const resp = await axios.get(`${API}/books`);
+    const books = Object.entries(resp.data).map((item) => ({
+      ...item[1][0],
+      item_id: item[0],
+    }));
+    return books;
+  } catch (error) {
+    throw new Error(error);
+  }
+});
 
-export const removeBook = createAsyncThunk(
-  'books/removeBook',
-  async (id, thunkCB) => {
-    try {
-      const response = await axios.delete(`${url}${id}`);
-
-      if (response.status === 201) {
-        thunkCB.dispatch(fetchBooks());
-        return null;
-      }
-      return null;
-    } catch (err) {
-      return thunkCB.rejectWithValue('Failed to delete the book');
-    }
-  },
-);
+export const deleteBook = createAsyncThunk('books/DELETE_BOOK', async (id) => {
+  try {
+    await axios.delete(`${API}/books/${id}`);
+    return id;
+  } catch (error) {
+    throw new Error(error);
+  }
+});
 
 const initialState = {
   books: [],
-  isLoading: false,
-  errorMsg: false,
-  postMsg: false,
-  deleteMsg: false,
+  loading: false,
+  error: null,
 };
 
 const booksSlice = createSlice({
@@ -68,36 +48,28 @@ const booksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBooks.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchBooks.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.books = action.payload;
-      })
-      .addCase(fetchBooks.rejected, (state) => {
-        state.isLoading = false;
-        state.errorMsg = true;
-      })
-      .addCase(addBook.pending, (state) => {
-        state.postMsg = true;
-      })
       .addCase(addBook.fulfilled, (state, action) => {
-        state.postMsg = false;
+        state.books.push(action.payload);
+      })
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        const id = action.payload;
+        const index = state.books.findIndex((book) => book.item_id === id);
+        if (index !== -1) {
+          state.books.splice(index, 1);
+        }
+      })
+      .addCase(getBooks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getBooks.fulfilled, (state, action) => {
         state.books = action.payload;
+        state.loading = false;
+        state.error = null;
       })
-      .addCase(addBook.rejected, (state) => {
-        state.postMsg = false;
-      })
-      .addCase(removeBook.pending, (state) => {
-        state.deleteMsg = true;
-      })
-      .addCase(removeBook.fulfilled, (state, action) => {
-        state.deleteMsg = false;
-        state.books = action.payload;
-      })
-      .addCase(removeBook.rejected, (state) => {
-        state.deleteMsg = false;
+      .addCase(getBooks.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
       });
   },
 });
