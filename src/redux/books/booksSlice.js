@@ -3,6 +3,30 @@ import axios from 'axios';
 
 const API = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/cA7Cf2g9Qk0jCIg46zd1';
 
+export const updateChapter = createAsyncThunk(
+  'books/UPDATE_CHAPTER',
+  async ({ id, chapter }) => {
+    try {
+      await axios.put(`${API}/books/${id}`, { chapter });
+      return { id, chapter };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+);
+
+export const updatePercentage = createAsyncThunk(
+  'books/UPDATE_PERCENTAGE',
+  async ({ id, percentage }) => {
+    try {
+      await axios.put(`${API}/books/${id}`, { percentage });
+      return { id, percentage };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+);
+
 export const addBook = createAsyncThunk('books/ADD_BOOK', async (book) => {
   try {
     await axios.post(`${API}/books`, book);
@@ -64,6 +88,20 @@ const booksSlice = createSlice({
         state.books = action.payload;
         state.loading = false;
         state.error = null;
+      })
+      .addCase(updateChapter.fulfilled, (state, action) => {
+        const { id, chapter } = action.payload;
+        const book = state.books.find((book) => book.item_id === id);
+        if (book) {
+          book.chapter = chapter;
+        }
+      })
+      .addCase(updatePercentage.fulfilled, (state, action) => {
+        const { id, percentage } = action.payload;
+        const book = state.books.find((book) => book.item_id === id);
+        if (book) {
+          book.percentage = percentage;
+        }
       })
       .addCase(getBooks.rejected, (state) => {
         state.loading = false;

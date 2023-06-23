@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../redux/books/booksSlice';
 
-const BookForm = ({ onAddBook, onDelete }) => {
+const BookForm = ({ onAddBook }) => {
   const dispatch = useDispatch();
 
   const submitBookHandler = (e) => {
@@ -68,11 +68,6 @@ const BookForm = ({ onAddBook, onDelete }) => {
 };
 BookForm.propTypes = {
   onAddBook: PropTypes.func.isRequired,
-  onDelete: PropTypes.func,
-};
-
-BookForm.defaultProps = {
-  onDelete: null,
 };
 
 export default BookForm;
